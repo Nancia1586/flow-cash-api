@@ -1,7 +1,7 @@
 export type TCategory = {
   id: string;
   label: string;
-  type: CategoryType;
+  type: string;
   icon: string;
   color: string;
   userId: string;
