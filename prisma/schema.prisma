@@ -12,3 +12,44 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id                  String      @id @default(uuid())
+  lastname            String
+  firstname           String
+  dateOfBirth         DateTime    @map("date_of_birth")
+  gender              String
+  email               String
+  password            String
+  defaultCurrency     String      @map("default_currency")
+  createdAt           DateTime    @default(now()) @map("created_at")
+  categories          Category[]
+  transactions        Transaction[]
+}
+
+model Category {
+  id                  String      @id @default(uuid())
+  label               String
+  type                String
+  icon                String
+  color               String
+  userId              String
+  createdAt           DateTime    @default(now()) @map("created_at")
+  user                User        @relation(fields: [userId], references: [id])
+  transactions        Transaction[]
+
+  @@index([userId])   // Optimisation des recherches par userId
+}
+
+model Transaction {
+  id                  String      @id @default(uuid())
+  categoryId          String
+  amount              Float
+  userId              String
+  createdAt           DateTime    @default(now()) @map("created_at")
+  user                User        @relation(fields: [userId], references: [id])
+  category            Category    @relation(fields: [categoryId], references: [id])
+
+  @@index([userId])   // Optimisation des recherches par userId
+  @@index([categoryId])   // Optimisation des recherches par categoryId
+}
