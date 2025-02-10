@@ -82,12 +82,11 @@ export class CategoryService {
     const take = itemsPerPage ? parseInt(itemsPerPage.toString()) : undefined;
     const whereClause = {
       AND: [
-        label
-          ? { label: { contains: label, mode: Prisma.QueryMode.insensitive } }
-          : {},
-        type ? { type } : {},
-        userId ? { userId } : {},
-        { deletedAt: null },
+        ...(label
+          ? [{ contains: label, mode: Prisma.QueryMode.insensitive }]
+          : []),
+        ...(type ? [{ type }] : []),
+        ...(userId ? [{ userId }] : []),
       ].filter((clause) => Object.keys(clause).length > 0),
     };
 
