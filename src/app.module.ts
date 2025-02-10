@@ -6,6 +6,8 @@ import { NestjsFormDataModule } from 'nestjs-form-data';
 
 import configuration from '@/config/configuration';
 import { UtilsModule } from '@/utils/utils.module';
+import { CategoryModule } from './modules/category/category.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { UtilsModule } from '@/utils/utils.module';
     }),
     NestjsFormDataModule.config({ isGlobal: true }),
     UtilsModule,
+    CategoryModule,
+    UserModule,
   ],
   providers: [
     {
