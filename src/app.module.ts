@@ -8,6 +8,7 @@ import configuration from '@/config/configuration';
 import { UtilsModule } from '@/utils/utils.module';
 import { CategoryModule } from './modules/category/category.module';
 import { UserModule } from './modules/user/user.module';
+import { TransactionModule } from './modules/transaction/transaction.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { UserModule } from './modules/user/user.module';
     UtilsModule,
     CategoryModule,
     UserModule,
+    TransactionModule,
   ],
   providers: [
     {
